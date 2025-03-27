@@ -10,11 +10,13 @@ const BikeDetails = () => {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-6 ">
       <h1 className="text-3xl font-bold">{bike.name}</h1>
       <img src={bike.image} alt={bike.name} className="w-full h-60 object-cover rounded-lg mt-4" />
+      <div className="flex flex-col items-center justify-center">
       <p className="mt-4 text-gray-700">{bike.description}</p>
       <p className="mt-2 text-gray-600">Manufacturer: {bike.manufacturer}</p>
+      </div>
     </div>
   );
 };
