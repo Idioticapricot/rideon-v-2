@@ -2,9 +2,8 @@ import { useParams } from "react-router-dom";
 import { bikes } from "../../utils/data";
 import { service } from "../../utils/service"; 
 import Navbar from "../../components/Navbar/Navbar";
-import YoutubeEmbed from "../../utils/YoutubeEmbed";
 import { useState } from "react";
-import "./bikeDetails.css"
+import "./bikeDetails.css";
 
 const BikeDetails = () => {
   const { bikeId } = useParams();
@@ -16,10 +15,10 @@ const BikeDetails = () => {
     return <p className="text-center text-red-500">Bike not found!</p>;
   }
 
- 
+  // Get services specific to the current bike
   const bikeServices = service[bikeId] || [];
 
- 
+  // Get stored state for the current bike
   const currentOdo = bikeData[bikeId]?.currentOdo || "";
   const lastServiceOdo = bikeData[bikeId]?.lastServiceOdo || "";
   const filteredServices = bikeData[bikeId]?.filteredServices || [];
@@ -33,7 +32,7 @@ const BikeDetails = () => {
       return;
     }
 
-   
+    // Filter services based on the odometer difference
     const dueServices = bikeServices.filter((item) => item.intervalKm <= odoDifference);
 
     setBikeData((prevData) => ({
@@ -105,17 +104,19 @@ const BikeDetails = () => {
           </form>
         </div>
 
-        
-        <div className="services-list">
-          <h2 className="text-2xl font-bold mt-6">Due Services</h2>
-          <ul>
-            {filteredServices.map((serviceItem, index) => (
-              <li key={index} className="mt-2">{serviceItem.name}: {serviceItem.description}</li>
-            ))}
-          </ul>
-        </div>
-
-        <YoutubeEmbed />
+        {/* Display due services */}
+        {filteredServices.length > 0 && (
+          <div className="services-list">
+            <h2 className="text-2xl font-bold mt-6">Due Services</h2>
+            <ul>
+              {filteredServices.map((serviceItem, index) => (
+                <li key={index} className="service-item">
+                  <strong>{serviceItem.name}</strong>: {serviceItem.description}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
