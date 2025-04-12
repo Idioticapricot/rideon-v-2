@@ -31,13 +31,15 @@ const Login = () => {
           <form onSubmit={handleLogin}>
             <h1 className="text-2xl mb-7">Login</h1>
 
-            <input
-              type="text"
-              placeholder="Email"
-              className="input-box"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+            <div className="flex items-center bg-transparent border-[1.5px] px-5 rounded mb-4">
+  <input
+    type="text"
+    placeholder="Email"
+    className="w-full text-sm bg-transparent py-3 mr-3 rounded border-none outline-none focus:outline-none focus:ring-0 focus:border-transparent"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+  />
+</div>
             <PasswordInput
               value={password}
               onChange={(e) => setPassword(e.target.value)}

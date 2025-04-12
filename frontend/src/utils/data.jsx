@@ -7,18 +7,18 @@ export const bikes = [
       description: "A cruiser with well refined 350cc engine",
     },
     {
-      id: "honda_cbr500r",
-      name: "Honda CBR500R",
-      manufacturer: "Honda",
+      id: "adventure_790",
+      name: "Adventure 790",
+      manufacturer: "KTM",
       image: "/images/honda.webp",
-      description: "A mid-range sportbike with smooth power delivery.",
+      description: "A sportbike with smooth power delivery.",
     },
     {
-      id: "Access_125",
-      name: "Access-125",
-      manufacturer: "Suzuiki",
-      image: "/images/3.webp",
-      description: "SIDDU BANDI.",
+      id: "activa",
+      name: "Honda Activa",
+      manufacturer: "Honda",
+      image: "/images/3.avif",
+      description: "India's Scooty",
     }
   ];
   

@@ -59,7 +59,7 @@ const BikeDetails = () => {
         <div className="form-container">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="currentOdo">Enter Current Odometer Reading</label>
+              <label htmlFor="currentOdo" className="block text-lg font-medium mb-2">Enter Current Odometer Reading</label>
               <input
                 type="number"
                 id="currentOdo"
@@ -75,11 +75,12 @@ const BikeDetails = () => {
                   }))
                 }
                 required
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="lastServiceOdo">Enter Last Service Odometer Reading</label>
+              <label htmlFor="lastServiceOdo" className="block text-lg font-medium mb-2">Enter Last Service Odometer Reading</label>
               <input
                 type="number"
                 id="lastServiceOdo"
@@ -95,10 +96,11 @@ const BikeDetails = () => {
                   }))
                 }
                 required
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
-            <button type="submit" className="submit-button">
+            <button type="submit" className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
               Submit
             </button>
           </form>
@@ -106,12 +108,24 @@ const BikeDetails = () => {
 
         {/* Display due services */}
         {filteredServices.length > 0 && (
-          <div className="services-list">
-            <h2 className="text-2xl font-bold mt-6">Due Services</h2>
-            <ul>
+          <div className="services-list mt-6">
+            <h2 className="text-2xl font-bold">Due Services</h2>
+            <ul className="space-y-4">
               {filteredServices.map((serviceItem, index) => (
-                <li key={index} className="service-item">
-                  <strong>{serviceItem.name}</strong>: {serviceItem.description}
+                <li key={index} className="flex justify-between items-center bg-gray-100 p-4 rounded-md shadow-md">
+                  <div>
+                    <strong className="text-lg">{serviceItem.name}</strong>: {serviceItem.description}
+                  </div>
+
+                  {/* Display video button if links exist */}
+                  {serviceItem.links && serviceItem.links.length > 0 && (
+                    <button
+                      onClick={() => window.open(serviceItem.links[0].url, "_blank")}
+                      className="ml-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none"
+                    >
+                      Watch Video
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
