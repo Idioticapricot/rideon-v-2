@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import ProfileInfo from '../Cards/ProfileInfo';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+  const location = useLocation(); // 👈 Import hook to get current path
 
   const onLogout = () => {
     navigate("/login");
   };
 
   const handleSearch = () => {
-    console.log("Searching for:", searchQuery); // You can trigger search logic here
+    console.log("Searching for:", searchQuery);
   };
 
   const onClearSearch = () => {
@@ -25,12 +26,15 @@ const Navbar = () => {
         <h2 className="text-xl font-medium text-black py-2">Ride On</h2>
       </Link>
 
-      <SearchBar
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        handleSearch={handleSearch}
-        onClearSearch={onClearSearch}
-      />
+      {/* 👇 Only show SearchBar on /home route */}
+      {location.pathname === "/dashboard" && (
+        <SearchBar
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          handleSearch={handleSearch}
+          onClearSearch={onClearSearch}
+        />
+      )}
 
       <ProfileInfo onLogout={onLogout} />
     </div>

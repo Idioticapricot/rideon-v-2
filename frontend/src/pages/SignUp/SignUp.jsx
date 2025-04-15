@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
-import Navbar from '../../components/Navbar/Navbar';
-import PasswordInput from '../Login/PasswordInput';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import Navbar from "../../components/Navbar/Navbar";
+import PasswordInput from "../Login/PasswordInput";
+import { Link, useNavigate } from "react-router-dom";
+import supabase from "../../utils/supabaseClient";
 
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState(""); // Confirmation message
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const validateEmail = (email) => {
-    return /\S+@\S+\.\S+/.test(email);
-  };
+  // Email validation
+  const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
 
+    setError('');
+    setMessage(''); // Reset messages on new submission
+
+    // Validate the fields
     if (!name) {
       setError("Name is required");
       return;
@@ -26,14 +32,37 @@ const SignUp = () => {
       return;
     }
 
+    if (!email) {
+      setError("Email is required");
+      return;
+    }
+
     if (!password) {
       setError("Password is required");
       return;
     }
 
-    setError(""); // Clear error if all validations pass
+    try {
+      const { user, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
 
-    // Proceed with sign-up logic
+      if (error) throw error;
+
+      // Reset form fields
+      setEmail("");
+      setName("");
+      setPassword("");
+
+      // Set confirmation message
+      setMessage("Check your inbox for the confirmation email.");
+
+      // Optionally, redirect to login page
+      // navigate("/login");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -62,6 +91,7 @@ const SignUp = () => {
               value={password}
             />
             {error && <p className="text-red-500 text-sm">{error}</p>}
+            {message && <p className="text-green-600 text-sm">{message}</p>}
             <button type="submit" className="btn-primary">
               SignUp
             </button>

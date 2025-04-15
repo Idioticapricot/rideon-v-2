@@ -1,28 +1,48 @@
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PasswordInput from "./PasswordInput";
-import { validateEmail } from "../../utils/helper";
+import supabase from "../../utils/supabaseClient";
 
 const Login = () => {
+  const navigate = useNavigate(); // To redirect after successful login
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if(!validateEmail(email)){
-      setError("Invalid Email");
+    // Check if email and password are not empty
+    if (!email) {
+      setError("Email is required.");
       return;
     }
-    setError("")
-    if(!password){
-      setError("Password is required");
+
+    if (!password) {
+      setError("Password is required.");
       return;
     }
-    setError("")
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        setError(error.message);
+        return;
+      }
+
+      // If login is successful, navigate to the dashboard
+      navigate("/dashboard");
+    } catch (err) {
+      setError("An error occurred. Please try again.");
+      console.error("Login error:", err);
+    }
   };
-  
+
   return (
     <>
       <Navbar />
@@ -32,18 +52,20 @@ const Login = () => {
             <h1 className="text-2xl mb-7">Login</h1>
 
             <div className="flex items-center bg-transparent border-[1.5px] px-5 rounded mb-4">
-  <input
-    type="text"
-    placeholder="Email"
-    className="w-full text-sm bg-transparent py-3 mr-3 rounded border-none outline-none focus:outline-none focus:ring-0 focus:border-transparent"
-    value={email}
-    onChange={(e) => setEmail(e.target.value)}
-  />
-</div>
+              <input
+                type="text"
+                placeholder="Email"
+                className="w-full text-sm bg-transparent py-3 mr-3 rounded border-none outline-none focus:outline-none focus:ring-0 focus:border-transparent"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
             <PasswordInput
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+
             {error && <p className="text-red-500 text-sm">{error}</p>}
 
             <button type="submit" className="btn-primary">
