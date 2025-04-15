@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import { supabase } from '../../utils/supabaseClient';
-import "./bikeDetails.css";
+import "./BikeDetails.css";
 
 const BikeDetails = () => {
   const [bike, setBike] = useState(null);
