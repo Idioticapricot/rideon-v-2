@@ -14,12 +14,15 @@ const AppRoutes = () => {
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/dashboard" element={
+        <Route path="/" element={
           <ProtectedRoute>
             <Home />
           </ProtectedRoute>
         } />
-        <Route path="/bikes/:bikeId" element={<BikeDetails />} />
+        <Route path="/bikes/:bikeId" element={
+          <ProtectedRoute>
+           <BikeDetails />
+           </ProtectedRoute>} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} /> {/* Put this last */}
