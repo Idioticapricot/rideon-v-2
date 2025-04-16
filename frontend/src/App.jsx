@@ -6,22 +6,28 @@ import SignUp from "./pages/SignUp/SignUp";
 import BikeDetails from "./pages/Home/BikeDetails";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar/Navbar";
-import Auth from "./utils/Auth"; // Import the Auth component
+import { AuthProvider } from "./utils/AuthProvider";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 // Define Routes in a function
 const AppRoutes = () => {
   return (
-    <Routes>
-      <Route path="*" element={<Login />} />
-
-      <Route path="/dashboard" element={<Home />} />
-
-      <Route path="/bikes/:bikeId" element={<BikeDetails />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/login" element={<Login />} />
-    </Routes>
+    <AuthProvider>
+      <Routes>
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        } />
+        <Route path="/bikes/:bikeId" element={<BikeDetails />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<NotFound />} /> {/* Put this last */}
+      </Routes>
+    </AuthProvider>
   );
 };
+
 
 const App = () => {
   return (

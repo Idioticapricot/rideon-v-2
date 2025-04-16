@@ -3,10 +3,8 @@ export const validateEmail = (email) => {
   return regex.test(email);
 };
 export const getInitials = (name) => {
+  if (!name) return "";  // Check for undefined or empty name
+
   const words = name.split(" ");
-  let intials = "";
-  for (let i = 0; i < Math.min(words.length, 2); i++) {
-    intials += words[i][0];
-  }
-  return intials.toLocaleUpperCase();
+  return words.slice(0, 2).map(word => word[0].toUpperCase()).join('');
 };

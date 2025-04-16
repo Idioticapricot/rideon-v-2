@@ -44,8 +44,14 @@ const SignUp = () => {
 
     try {
       const { user, error } = await supabase.auth.signUp({
+        name,
         email,
         password,
+        options: {
+          data: {
+            full_name: name, // Store name in user_metadata
+          },
+        },
       });
 
       if (error) throw error;
