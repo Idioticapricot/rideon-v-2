@@ -12,7 +12,7 @@ import Auth from "./utils/Auth"; // Import the Auth component
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="*" element={<NotFound />} />
+      <Route path="*" element={<Login />} />
 
       <Route path="/dashboard" element={<Home />} />
 
