@@ -14,7 +14,7 @@ const NotFound = () => {
           <p className="text-sm mb-6">
             The page you are looking for doesn't exist or has been moved.
           </p>
-          <Link to="/dashboard" className="btn-primary">
+          <Link to="/" className="btn-primary">
             Go back to Home
           </Link>
         </div>
