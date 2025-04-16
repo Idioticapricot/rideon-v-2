@@ -27,16 +27,16 @@ const Navbar = () => {
   };
 
   // Conditionally render ProfileInfo based on the current route
-  const showProfileInfo = location.pathname === "/dashboard" || location.pathname === "/bikes/:bikeId"; 
+  const showProfileInfo = location.pathname === "/" || location.pathname === "/bikes/:bikeId"; 
 
   return (
     <div className="bg-white w-full flex items-center justify-between px-6 py-2 drop-shadow">
-      <Link to="/dashboard">
+      <Link to="/">
         <h2 className="text-xl font-medium text-black py-2">Ride On</h2>
       </Link>
 {/*
       
-      {location.pathname === "/dashboard" && (
+      {location.pathname === "/" && (
        <SearchBar
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}

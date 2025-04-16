@@ -35,8 +35,8 @@ const Login = () => {
         return;
       }
 
-      // If login is successful, navigate to the dashboard
-      navigate("/dashboard");
+      // If login is successful, navigate to the 
+      navigate("/");
     } catch (err) {
       setError("An error occurred. Please try again.");
       console.error("Login error:", err);
