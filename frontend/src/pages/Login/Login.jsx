@@ -5,7 +5,7 @@ import PasswordInput from "./PasswordInput";
 import supabase from "../../utils/supabaseClient";
 
 const Login = () => {
-  const navigate = useNavigate(); // To redirect after successful login
+  const navigate = useNavigate(); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -13,7 +13,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Check if email and password are not empty
+   
     if (!email) {
       setError("Email is required.");
       return;
@@ -35,7 +35,7 @@ const Login = () => {
         return;
       }
 
-      // If login is successful, navigate to the 
+      
       navigate("/");
     } catch (err) {
       setError("An error occurred. Please try again.");
