@@ -34,16 +34,17 @@ const Navbar = () => {
       <Link to="/dashboard">
         <h2 className="text-xl font-medium text-black py-2">Ride On</h2>
       </Link>
-
-      {/* Conditionally render SearchBar only on /dashboard */}
+{/*
+      
       {location.pathname === "/dashboard" && (
-        <SearchBar
+       <SearchBar
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           handleSearch={handleSearch}
           onClearSearch={onClearSearch}
         />
       )}
+    */} 
 
       {/* Conditionally render ProfileInfo only on specific routes */}
       {showProfileInfo && <ProfileInfo onLogout={handleLogout} />}
