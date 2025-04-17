@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function LandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,9 +32,11 @@ export default function LandingPage() {
                 {item}
               </a>
             ))}
+            <Link to="/login">
             <button className="bg-green-500 hover:bg-green-400 text-black font-semibold px-4 py-2 rounded-lg transition-colors">
               Sign In
             </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -92,40 +95,70 @@ export default function LandingPage() {
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 1.2 }}
         >
+          <Link to="/login">
           <button className="bg-green-500 hover:bg-green-400 text-black font-semibold px-6 py-3 text-lg rounded-xl transition-colors">
             Get Started
           </button>
+          </Link>
         </motion.div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="bg-zinc-900 px-6 py-20 grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-        {[
-          {
-            title: "Smart Alerts",
-            desc: "Get notified before your next bike service is due."
-          },
-          {
-            title: "Odometer Tracking",
-            desc: "Enter your odometer readings and track service history."
-          },
-          {
-            title: "Detailed Records",
-            desc: "Maintain logs for every part and check-up."
-          },
-        ].map((feature, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: idx * 0.2 }}
-            viewport={{ once: true }}
-            className="p-6 bg-zinc-800 rounded-2xl shadow-md hover:bg-zinc-700 transition-colors"
-          >
-            <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-            <p className="text-gray-400">{feature.desc}</p>
-          </motion.div>
-        ))}
+      <section id="features" className="bg-zinc-900 px-6 py-20">
+        <motion.h2 
+          className="text-3xl md:text-4xl font-bold text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          Smart Features for Smarter Riding
+        </motion.h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {[
+            {
+              title: "Smart Bill Scanner",
+              desc: "AI-powered bill scanning with OCR and automated maintenance history logging."
+            },
+            {
+              title: "Predictive Maintenance",
+              desc: "ML-powered forecasting of upcoming services based on usage patterns."
+            },
+            {
+              title: "Cost Analytics",
+              desc: "Detailed spending analysis with part-wise breakdowns and cost-saving suggestions."
+            },
+            {
+              title: "Issue Diagnosis",
+              desc: "AI-powered symptom analysis with mechanic tips and community-based solutions."
+            }
+          ].map((feature, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              viewport={{ once: true }}
+              className="p-6 bg-zinc-800 rounded-2xl shadow-md hover:bg-zinc-700 transition-colors"
+            >
+              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+              <p className="text-gray-400">{feature.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+        <motion.div 
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <Link to="/features">
+            <button className="bg-green-500 hover:bg-green-400 text-black font-semibold px-6 py-3 text-lg rounded-xl transition-colors">
+              View All Features
+            </button>
+          </Link>
+        </motion.div>
       </section>
 
       {/* CTA Section */}

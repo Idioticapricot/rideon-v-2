@@ -9,7 +9,7 @@
         font-family: "Poppins","sans-serif";
     }
     body{
-        background-color: #fdfeff;
+        background-color: #000000;
         overflow-x: hidden;
     }
 }
@@ -19,6 +19,6 @@
         @apply w-full text-sm bg-transparent border-[1.5px] px-5 py-3 rounded mb-4 outline-none ;
     }
     .btn-primary{
-        @apply w-full text-sm bg-primary text-white p-2 rounded my-1 hover:bg-blue-600;
+        @apply w-full text-sm bg-green-500 text-black font-semibold p-2 rounded-lg hover:bg-green-400 transition-colors;
     }
 }

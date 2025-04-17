@@ -10,7 +10,7 @@ const Navbar = () => {
   const location = useLocation();
 
   const onLogout = () => {
-    navigate("/login");
+    navigate("/");
   };
 
   const handleSearch = () => {
@@ -23,10 +23,10 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    navigate('/login'); 
+    navigate('/'); 
   };
 
-  const showProfileInfo = location.pathname === "/" || location.pathname === "/bikes/:bikeId"; 
+  const showProfileInfo = location.pathname === "/dashboard" || location.pathname === "/bikes/:bikeId"; 
 
   return (
     <motion.nav 
@@ -46,16 +46,7 @@ const Navbar = () => {
           </motion.h2>
         </Link>
 
-        {/*
-          {location.pathname === "/" && (
-            <SearchBar
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              handleSearch={handleSearch}
-              onClearSearch={onClearSearch}
-            />
-          )}
-        */}
+        
 
         {showProfileInfo && (
           <motion.div

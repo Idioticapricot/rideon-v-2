@@ -16,7 +16,7 @@ const AppRoutes = () => {
     
     <AuthProvider>
       <Routes>
-        <Route path="/" element={
+        <Route path="/dashboard" element={
           <ProtectedRoute>
             <Home />
           </ProtectedRoute>
@@ -27,7 +27,8 @@ const AppRoutes = () => {
            </ProtectedRoute>} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="*" element={<LandingPage />} /> {/* Put this last */}
+        <Route path="/" element={<LandingPage />} />
+        <Route path="*" element={<NotFound />} /> {/* Put this last */}
       </Routes>
     </AuthProvider>
   );

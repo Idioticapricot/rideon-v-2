@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import supabase from './supabaseClient'; // adjust path as needed
 
 const AuthContext = createContext();
@@ -7,23 +7,41 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const getSession = async () => {
+  const getSession = useCallback(async () => {
+    try {
       const { data: { session } } = await supabase.auth.getSession();
       setUser(session?.user || null);
+    } catch (error) {
+      console.error('Error getting session:', error);
+    } finally {
       setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+    let authListener;
+
+    const initializeAuth = async () => {
+      await getSession();
+      
+      if (mounted) {
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+          setUser(session?.user || null);
+        });
+        authListener = subscription;
+      }
     };
 
-    getSession();
-
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user || null);
-    });
+    initializeAuth();
 
     return () => {
-      listener.subscription.unsubscribe();
+      mounted = false;
+      if (authListener) {
+        authListener.unsubscribe();
+      }
     };
-  }, []);
+  }, [getSession]);
 
   return (
     <AuthContext.Provider value={{ user, loading }}>

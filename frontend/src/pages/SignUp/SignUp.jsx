@@ -72,45 +72,58 @@ const SignUp = () => {
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-black text-white">
       <Navbar />
-      <div className="flex items-center justify-center mt-28">
-        <div className="w-96 border rounded bg-white px-7 py-10">
+      <div className="flex items-center justify-center min-h-screen pt-16">
+        <div className="w-96 bg-zinc-900/95 backdrop-blur-sm rounded-2xl px-7 py-10 shadow-xl border border-zinc-800">
           <form onSubmit={handleSignUp}>
-            <h1 className="text-2xl mb-7">SignUp</h1>
-            <input
-              type="text"
-              placeholder="Name"
-              className="input-box"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Email"
-              className="input-box"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+            <h1 className="text-2xl font-bold mb-7 text-green-500">Sign Up</h1>
+            
+            <div className="flex items-center bg-zinc-800 border border-zinc-700 px-5 rounded-lg mb-4">
+              <input
+                type="text"
+                placeholder="Name"
+                className="w-full text-sm bg-transparent py-3 mr-3 rounded border-none outline-none focus:outline-none focus:ring-0 focus:border-transparent text-white placeholder-gray-400"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+
+            <div className="flex items-center bg-zinc-800 border border-zinc-700 px-5 rounded-lg mb-4">
+              <input
+                type="text"
+                placeholder="Email"
+                className="w-full text-sm bg-transparent py-3 mr-3 rounded border-none outline-none focus:outline-none focus:ring-0 focus:border-transparent text-white placeholder-gray-400"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
             <PasswordInput
               onChange={(e) => setPassword(e.target.value)}
               value={password}
             />
-            {error && <p className="text-red-500 text-sm">{error}</p>}
-            {message && <p className="text-green-600 text-sm">{message}</p>}
-            <button type="submit" className="btn-primary">
-              SignUp
+
+            {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+            {message && <p className="text-green-500 text-sm mb-4">{message}</p>}
+
+            <button 
+              type="submit" 
+              className="w-full bg-green-500 hover:bg-green-400 text-black font-semibold px-4 py-2 rounded-lg transition-colors"
+            >
+              Sign Up
             </button>
-            <p className="text-sm text-center mt-4">
-              Already registered?
-              <Link to="/login" className="font-medium text-primary underline">
+
+            <p className="text-sm text-center mt-4 text-gray-400">
+              Already registered?{" "}
+              <Link to="/login" className="font-medium text-green-500 hover:text-green-400 transition-colors">
                 Login
               </Link>
             </p>
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
