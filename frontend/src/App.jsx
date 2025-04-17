@@ -8,10 +8,12 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar/Navbar";
 import { AuthProvider } from "./utils/AuthProvider";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import LandingPage from "./pages/Landing/LandingPage";
 
 // Define Routes in a function
 const AppRoutes = () => {
   return (
+    
     <AuthProvider>
       <Routes>
         <Route path="/" element={
@@ -25,7 +27,7 @@ const AppRoutes = () => {
            </ProtectedRoute>} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="*" element={<NotFound />} /> {/* Put this last */}
+        <Route path="*" element={<LandingPage />} /> {/* Put this last */}
       </Routes>
     </AuthProvider>
   );

@@ -134,15 +134,17 @@ const BikeDetails = () => {
   }
 
   return (
-    <div>
+    <div className="min-h-screen bg-dark">
       <Navbar />
       <div className="p-6">
-        <h1 className="text-3xl font-bold">{bike.name || bike['Image text']}</h1>
-        <img
-          src={bike.image}
-          alt={bike.name || bike['Image text']}
-          className="w-full h-60 object-cover rounded-lg mt-4"
-        />
+        <h1 className="text-3xl font-bold text-white">{bike.name || bike['Image text']}</h1>
+        <div className="relative h-[400px] mt-4 rounded-lg overflow-hidden">
+          <img
+            src={bike.image}
+            alt={bike.name || bike['Image text']}
+            className="absolute w-full h-full object-contain bg-[#1a1a1a]"
+          />
+        </div>
 
         <div className="form-container mt-8 max-w-2xl mx-auto">
           <form onSubmit={handleSubmit}>
@@ -205,18 +207,18 @@ const BikeDetails = () => {
 
         {filteredServices.length > 0 && (
           <div className="services-list mt-12 max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold mb-6">Due Services ({filteredServices.length})</h2>
+            <h2 className="text-2xl font-bold mb-6 text-green">Due Services ({filteredServices.length})</h2>
             <div className="space-y-4">
               {filteredServices.map((service) => (
                 <div 
                   key={service.id} 
-                  className="bg-white p-4 rounded-lg shadow-md border border-gray-200"
+                  className="p-4 rounded-lg shadow-md border border-gray-200"
                 >
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="text-lg font-semibold text-blue-600">{service.name}</h3>
-                      <p className="text-gray-700 mt-1">{service.description}</p>
-                      <p className="text-sm text-gray-500 mt-2">
+                      <h3 className="text-lg font-semibold text-blue-400">{service.name}</h3>
+                      <p className="text-gray-300 mt-1">{service.description}</p>
+                      <p className="text-sm text-gray-400 mt-2">
                         <span className="font-medium">Interval:</span> Every {service.intervalKm} km
                       </p>
                     </div>

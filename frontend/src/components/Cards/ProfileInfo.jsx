@@ -4,21 +4,19 @@ import { getInitials } from "../../utils/helper";
 
 const ProfileInfo = ({ onLogout }) => {
   const { user } = useAuth();
-  
-  const fullName = user?.user_metadata?.full_name || "Unknown User"; // Fallback if full_name is undefined
+  const fullName = user?.user_metadata?.full_name || "Unknown User";
 
   return (
-    <div className="flex items-center gap-3 sm:gap-6 sm:flex-row flex-col">
-      <div className="w-12 h-12 flex items-center justify-center rounded-full text-slate-950 font-medium bg-slate-100">
-        {getInitials(fullName)} {/* Use dynamic fullName */}
+    <div className="flex items-center gap-2">
+      <div className="w-10 h-10 flex items-center justify-center rounded-full text-slate-950 font-medium bg-green-500 hover:bg-green-400 transition-colors cursor-pointer">
+        {getInitials(fullName)}
       </div>
-      <div className="text-center sm:text-left"> {/* Center text on mobile, left-align on larger screens */}
-        {/* Hide the full name on small screens */}
-        <p className="text-sm font-medium hidden sm:block">{fullName}</p> {/* The full name will be hidden on screens smaller than 'sm' */}
-        <button className="text-sm text-slate-700 underline" onClick={onLogout}>
-          Logout
-        </button>
-      </div>
+      <button 
+        className="text-sm text-green-500 hover:text-green-400 transition-colors" 
+        onClick={onLogout}
+      >
+        Logout
+      </button>
     </div>
   );
 };

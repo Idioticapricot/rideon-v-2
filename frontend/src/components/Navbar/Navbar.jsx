@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import SearchBar from '../SearchBar/SearchBar';
+import { motion } from 'framer-motion';
 import supabase from '../../utils/supabaseClient';
 import ProfileInfo from '../Cards/ProfileInfo';
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-  const location = useLocation(); // 👈 Import hook to get current path
+  const location = useLocation();
 
   const onLogout = () => {
     navigate("/login");
@@ -26,29 +26,49 @@ const Navbar = () => {
     navigate('/login'); 
   };
 
-  // Conditionally render ProfileInfo based on the current route
   const showProfileInfo = location.pathname === "/" || location.pathname === "/bikes/:bikeId"; 
 
   return (
-    <div className="bg-white w-full flex items-center justify-between px-6 py-2 drop-shadow">
-      <Link to="/">
-        <h2 className="text-xl font-medium text-black py-2">Ride On</h2>
-      </Link>
-{/*
-      
-      {location.pathname === "/" && (
-       <SearchBar
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          handleSearch={handleSearch}
-          onClearSearch={onClearSearch}
-        />
-      )}
-    */} 
+    <motion.nav 
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="fixed w-full bg-black/90 backdrop-blur-sm z-50 border-b border-zinc-800"
+    >
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <Link to="/">
+          <motion.h2 
+            className="text-2xl font-bold text-green-500 hover:text-green-400 transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Ride On
+          </motion.h2>
+        </Link>
 
-      {/* Conditionally render ProfileInfo only on specific routes */}
-      {showProfileInfo && <ProfileInfo onLogout={handleLogout} />}
-    </div>
+        {/*
+          {location.pathname === "/" && (
+            <SearchBar
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              handleSearch={handleSearch}
+              onClearSearch={onClearSearch}
+            />
+          )}
+        */}
+
+        {showProfileInfo && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="ml-auto"
+          >
+            <ProfileInfo onLogout={handleLogout} />
+          </motion.div>
+        )}
+      </div>
+    </motion.nav>
   );
 };
 
