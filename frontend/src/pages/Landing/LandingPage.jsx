@@ -95,7 +95,7 @@ export default function LandingPage() {
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 1.2 }}
         >
-          <Link to="/login">
+          <Link to="/dashboard">
           <button className="bg-green-500 hover:bg-green-400 text-black font-semibold px-6 py-3 text-lg rounded-xl transition-colors">
             Get Started
           </button>

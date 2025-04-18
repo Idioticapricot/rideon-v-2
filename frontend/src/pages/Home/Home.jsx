@@ -63,7 +63,7 @@ const Home = () => {
             transition={{ duration: 0.5 }}
           >
             <p className="text-gray-400 text-lg">
-              No bikes available at the moment. Please check back later.
+              Loding...
             </p>
           </motion.div>
         )}
