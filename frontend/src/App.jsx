@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/Home";
+
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
 import BikeDetails from "./pages/Home/BikeDetails";
@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar/Navbar";
 import { AuthProvider } from "./utils/AuthProvider";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import LandingPage from "./pages/Landing/LandingPage";
+import Yourbikes from "./pages/yourbikes/yourbikes";
 
 // Define Routes in a function
 const AppRoutes = () => {
@@ -18,7 +19,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/dashboard" element={
           <ProtectedRoute>
-            <Home />
+            <Yourbikes />
           </ProtectedRoute>
         } />
         <Route path="/bikes/:bikeId" element={
