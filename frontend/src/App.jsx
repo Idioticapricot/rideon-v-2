@@ -9,7 +9,7 @@ import Navbar from "./components/Navbar/Navbar";
 import { AuthProvider } from "./utils/AuthProvider";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import LandingPage from "./pages/Landing/LandingPage";
-import Yourbikes from "./pages/yourbikes/yourbikes";
+import Yourbikes from "./pages/yourbikes/Yourbikes";
 
 // Define Routes in a function
 const AppRoutes = () => {
