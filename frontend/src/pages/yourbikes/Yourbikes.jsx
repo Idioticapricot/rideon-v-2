@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../utils/supabaseClient';
 import Navbar from '../../components/Navbar/Navbar';
-import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import BikeCard from '../../components/Cards/BikeCard';
 
-import './BikeDetails.css'; // reuse styling
 
 const Yourbikes = () => {
   const [bikes, setBikes] = useState([]);
@@ -61,7 +59,7 @@ const Yourbikes = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center h-screen bg-black text-white">
         <p className="text-xl">Loading your bikes...</p>
       </div>
     );
@@ -69,10 +67,10 @@ const Yourbikes = () => {
 
   if (error) {
     return (
-      <div className="text-center p-8">
+      <div className="min-h-screen bg-black text-white p-8 text-center">
         <Navbar />
         <p className="text-red-500 text-xl mt-8">Error: {error}</p>
-        <button 
+        <button
           onClick={() => fetchUserBikes()}
           className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
@@ -84,9 +82,9 @@ const Yourbikes = () => {
 
   if (bikes.length === 0) {
     return (
-      <div className="text-center p-8">
+      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4 text-center">
         <Navbar />
-        <p className="text-white text-xl mt-8">You have no bikes added yet.</p>
+        <p className="text-xl text-gray-400">You have no bikes added yet.</p>
       </div>
     );
   }
@@ -94,7 +92,7 @@ const Yourbikes = () => {
   return (
     <div className="min-h-screen bg-black text-white">
       <Navbar />
-      <div className="max-w-7xl mx-auto px-6 pt-24 pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-24 pb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -108,7 +106,7 @@ const Yourbikes = () => {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -127,20 +125,17 @@ const Yourbikes = () => {
         </motion.div>
 
         {bikes.length === 0 && (
-          <motion.div 
+          <motion.div
             className="text-center py-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <p className="text-gray-400 text-lg">
-              Loding...
-            </p>
+            <p className="text-gray-400 text-lg">Loading...</p>
           </motion.div>
         )}
       </div>
     </div>
-  
   );
 };
 
