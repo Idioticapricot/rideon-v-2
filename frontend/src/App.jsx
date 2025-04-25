@@ -13,6 +13,7 @@ import Yourbikes from "./pages/yourbikes/Yourbikes";
 import Home from "./pages/Home/Home";
 import FeaturesPage from "./pages/Landing/FeaturesPage";
 import Maintenance from "./pages/profile/maintance";
+import FuelLog from "./pages/profile/fuellog";
 
 // Define Routes in a function
 const AppRoutes = () => {
@@ -35,9 +36,14 @@ const AppRoutes = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Home/>} />
         <Route path="/maintenance" element={
-         
+          
             <Maintenance />
-      
+         
+        } />
+        <Route path="/fuel-log" element={
+          
+            <FuelLog />
+          
         } />
         <Route path="*" element={<NotFound />} /> {/* Put this last */}
       </Routes>
