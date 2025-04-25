@@ -1,10 +1,24 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import ProfileInfo from "../../components/Cards/ProfileInfo";
+import { useAuth } from "../../utils/AuthProvider";
+import supabase from "../../utils/supabaseClient";
 
 export default function LandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const onLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      navigate("/");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
 
   const navItems = ["Features", "Pricing", "Contact"];
 
@@ -32,11 +46,15 @@ export default function LandingPage() {
                 {item}
               </a>
             ))}
-            <Link to="/login">
-            <button className="bg-green-500 hover:bg-green-400 text-black font-semibold px-4 py-2 rounded-lg transition-colors">
-              Sign In
-            </button>
-            </Link>
+            {user ? (
+              <ProfileInfo onLogout={onLogout} />
+            ) : (
+              <Link to="/login">
+                <button className="bg-green-500 hover:bg-green-400 text-black font-semibold px-4 py-2 rounded-lg transition-colors">
+                  Sign In
+                </button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -65,9 +83,13 @@ export default function LandingPage() {
                 {item}
               </a>
             ))}
-            <button className="w-full bg-green-500 hover:bg-green-400 text-black font-semibold px-4 py-2 rounded-lg transition-colors">
-              Sign In
-            </button>
+            {user ? (
+              <ProfileInfo onLogout={onLogout} />
+            ) : (
+              <button className="w-full bg-green-500 hover:bg-green-400 text-black font-semibold px-4 py-2 rounded-lg transition-colors">
+                Sign In
+              </button>
+            )}
           </div>
         </motion.div>
       </nav>
