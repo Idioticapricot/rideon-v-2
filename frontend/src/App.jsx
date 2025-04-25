@@ -12,6 +12,7 @@ import LandingPage from "./pages/Landing/LandingPage";
 import Yourbikes from "./pages/yourbikes/Yourbikes";
 import Home from "./pages/Home/Home";
 import FeaturesPage from "./pages/Landing/FeaturesPage";
+import Maintenance from "./pages/profile/maintance";
 
 // Define Routes in a function
 const AppRoutes = () => {
@@ -33,6 +34,11 @@ const AppRoutes = () => {
         <Route path="/features" element={<FeaturesPage/>} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Home/>} />
+        <Route path="/maintenance" element={
+         
+            <Maintenance />
+      
+        } />
         <Route path="*" element={<NotFound />} /> {/* Put this last */}
       </Routes>
     </AuthProvider>
