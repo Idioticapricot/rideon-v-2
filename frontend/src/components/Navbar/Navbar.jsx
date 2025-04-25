@@ -26,7 +26,7 @@ const Navbar = () => {
     navigate('/'); 
   };
 
-  const showProfileInfo = location.pathname === "/dashboard" || location.pathname === "/bikes/:bikeId" || location.pathname === "/home"
+  const showProfileInfo = location.pathname === "/dashboard" || location.pathname === "/bikes/:bikeId" || location.pathname === "/home" || location.pathname === "/features"
 
   return (
     <motion.nav 
@@ -35,8 +35,8 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
       className="fixed w-full bg-black/90 backdrop-blur-sm z-50 border-b border-zinc-800"
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link to="/">
+      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <Link to="/" className="flex-shrink-0">
           <motion.h2 
             className="text-2xl font-bold text-green-500 hover:text-green-400 transition-colors"
             whileHover={{ scale: 1.05 }}
@@ -46,14 +46,12 @@ const Navbar = () => {
           </motion.h2>
         </Link>
 
-        
-
         {showProfileInfo && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="ml-auto"
+            className="flex-shrink-0"
           >
             <ProfileInfo onLogout={handleLogout} />
           </motion.div>

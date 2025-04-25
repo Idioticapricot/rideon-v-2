@@ -11,6 +11,7 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import LandingPage from "./pages/Landing/LandingPage";
 import Yourbikes from "./pages/yourbikes/Yourbikes";
 import Home from "./pages/Home/Home";
+import FeaturesPage from "./pages/Landing/FeaturesPage";
 
 // Define Routes in a function
 const AppRoutes = () => {
@@ -29,6 +30,7 @@ const AppRoutes = () => {
            </ProtectedRoute>} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/features" element={<FeaturesPage/>} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Home/>} />
         <Route path="*" element={<NotFound />} /> {/* Put this last */}

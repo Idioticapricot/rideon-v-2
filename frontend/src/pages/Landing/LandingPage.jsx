@@ -25,8 +25,8 @@ export default function LandingPage() {
   return (
     <div className="bg-black text-white min-h-screen flex flex-col">
       {/* Navigation */}
-      <nav className="fixed w-full bg-black/90 backdrop-blur-sm z-50 px-6 py-4 border-b border-zinc-800">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <nav className="fixed w-full bg-black/90 backdrop-blur-sm z-50 px-4 py-4 border-b border-zinc-800">
+        <div className="max-w-7xl mx-auto flex items-center justify-between w-full">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -46,6 +46,9 @@ export default function LandingPage() {
                 {item}
               </a>
             ))}
+          </div>
+
+          <div className="hidden md:flex items-center">
             {user ? (
               <ProfileInfo onLogout={onLogout} />
             ) : (
@@ -86,16 +89,18 @@ export default function LandingPage() {
             {user ? (
               <ProfileInfo onLogout={onLogout} />
             ) : (
-              <button className="w-full bg-green-500 hover:bg-green-400 text-black font-semibold px-4 py-2 rounded-lg transition-colors">
+              <Link to="/login">
+              <button className="w-full bg-green-500 hover:bg-green-400 text-black font-semibold px-4 py-2 mt-4 rounded-lg transition-colors">
                 Sign In
               </button>
+              </Link>
             )}
           </div>
         </motion.div>
       </nav>
 
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center text-center px-6 py-32 mt-16">
+      <section className="flex flex-col items-center justify-center text-center px-4 py-32 mt-16">
         <motion.h1 
           className="text-5xl md:text-7xl font-bold mb-6"
           initial={{ opacity: 0, y: 20 }} 
@@ -126,7 +131,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="bg-zinc-900 px-6 py-20">
+      <section id="features" className="bg-zinc-900 px-4 py-20">
         <motion.h2 
           className="text-3xl md:text-4xl font-bold text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
@@ -139,20 +144,12 @@ export default function LandingPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {[
             {
-              title: "Smart Bill Scanner",
-              desc: "AI-powered bill scanning with OCR and automated maintenance history logging."
+              title: "Smart Bill Scanner & Service Tracking",
+              desc: "AI-powered bill scanning with OCR and automated maintenance history logging. Track services and predict maintenance needs."
             },
             {
-              title: "Predictive Maintenance",
-              desc: "ML-powered forecasting of upcoming services based on usage patterns."
-            },
-            {
-              title: "Cost Analytics",
-              desc: "Detailed spending analysis with part-wise breakdowns and cost-saving suggestions."
-            },
-            {
-              title: "Issue Diagnosis",
-              desc: "AI-powered symptom analysis with mechanic tips and community-based solutions."
+              title: "Fuel Prediction & Issue Diagnosis",
+              desc: "ML-powered fuel fillup predictions and AI-powered symptom analysis with mechanic tips."
             }
           ].map((feature, idx) => (
             <motion.div
@@ -184,7 +181,7 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section id="contact" className="bg-black px-6 py-20 text-center">
+      <section id="contact" className="bg-black px-4 py-20 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
