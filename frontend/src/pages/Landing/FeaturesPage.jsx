@@ -57,7 +57,7 @@ const FeaturesPage = () => {
         >
           <div className="flex items-center gap-4 mb-8">
             <button
-              onClick={() => navigate('/dashboard')}
+              onClick={() => navigate('/')}
               className="flex items-center gap-2 text-green-500 hover:text-green-400 transition-colors"
             >
               <ArrowLeft size={20} />
