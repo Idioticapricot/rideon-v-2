@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import { motion } from 'framer-motion';
-import { ScanLine, Wrench, Stethoscope, Bike, Settings, Fuel } from 'lucide-react';
+import { ScanLine, Wrench, Stethoscope, Bike, Settings, Fuel, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../../utils/supabaseClient';
 
@@ -55,6 +55,15 @@ const FeaturesPage = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
+          <div className="flex items-center gap-4 mb-8">
+            <button
+              onClick={() => navigate('/dashboard')}
+              className="flex items-center gap-2 text-green-500 hover:text-green-400 transition-colors"
+            >
+              <ArrowLeft size={20} />
+              <span>Back to Dashboard</span>
+            </button>
+          </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-green-500">
             Our Features
           </h1>

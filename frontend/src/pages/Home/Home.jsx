@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../../components/Navbar/Navbar';
-import BikeCard from '../../components/Cards/BikeCard';
+import Bikeadd from '../../components/Cards/Bikeadd';
 import { supabase } from '../../utils/supabaseClient';
 
 const Home = () => {
@@ -50,7 +50,7 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <BikeCard bike={bike} />
+              <Bikeadd bike={bike} />
             </motion.div>
           ))}
         </motion.div>

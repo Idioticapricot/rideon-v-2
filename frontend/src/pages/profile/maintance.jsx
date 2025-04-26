@@ -1,16 +1,36 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navbar from '../../components/Navbar/Navbar';
-import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import supabase from '../../utils/supabaseClient';
 
-const Maintenance = () => {
+export default function Maintenance() {
+  const [bikes, setBikes] = useState([]);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
-  const [maintenanceItems, setMaintenanceItems] = useState([
-    { id: 1, parts: 'Engine Oil', price: '₹500', note: 'Synthetic 10W-40' },
-    { id: 2, parts: 'Air Filter', price: '₹300', note: 'High flow performance' },
-    { id: 3, parts: 'Brake Pads', price: '₹800', note: 'Front set' },
-  ]);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    fetchUser();
+  }, []);
+
+  useEffect(() => {
+    if (user) fetchBikes();
+  }, [user]);
+
+  const fetchBikes = async () => {
+    const { data, error } = await supabase
+      .from('user_bike')
+      .select('*')
+      .eq('user_id', user.id);
+
+    if (error) console.error(error);
+    else setBikes(data);
+  };
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -31,49 +51,39 @@ const Maintenance = () => {
             </button>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-8 text-green-500">
-            Maintenance Parts
+            Select a Bike
           </h1>
           <p className="text-gray-400 text-lg mb-12 max-w-2xl">
-            Track and manage your bike maintenance parts and costs.
+            Choose a bike to view or manage its maintenance records.
           </p>
         </motion.div>
 
         <motion.div
-          className="bg-zinc-900 rounded-2xl shadow-lg border border-zinc-800 overflow-hidden"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-zinc-800">
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-green-500">Parts</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-green-500">Price</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-green-500">Note</th>
-                </tr>
-              </thead>
-              <tbody>
-                {maintenanceItems.map((item) => (
-                  <motion.tr
-                    key={item.id}
-                    className="border-b border-zinc-800 hover:bg-zinc-800 transition-colors"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <td className="px-6 py-4 text-white">{item.parts}</td>
-                    <td className="px-6 py-4 text-white">{item.price}</td>
-                    <td className="px-6 py-4 text-gray-400">{item.note}</td>
-                  </motion.tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          {bikes.map((bike, index) => (
+            <motion.button
+              key={bike.id}
+              onClick={() => navigate(`/maintenance/${bike.id}`)}
+              className="bg-zinc-900 p-6 rounded-2xl shadow-lg border border-zinc-800 hover:bg-zinc-800 transition-colors duration-300 text-left"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ y: -5 }}
+            >
+              <h3 className="text-xl font-semibold mb-2 text-white">
+                {bike.name || 'Unnamed Bike'}
+              </h3>
+              <p className="text-gray-400">
+                Click to view maintenance records
+              </p>
+            </motion.button>
+          ))}
         </motion.div>
       </div>
     </div>
   );
-};
-
-export default Maintenance;
+}

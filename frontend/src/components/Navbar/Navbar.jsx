@@ -26,7 +26,7 @@ const Navbar = () => {
     navigate('/'); 
   };
 
-  const showProfileInfo = location.pathname === "/dashboard" || location.pathname === "/bikes/:bikeId" || location.pathname === "/home" || location.pathname === "/features"
+  const showProfileInfo = location.pathname === "/dashboard" || location.pathname === "/bikes/:bikeId" || location.pathname === "/bikes/new" || location.pathname === "/features" || location.pathname === "/maintenance" || location.pathname === "/fuel-log" || location.pathname === "/maintenance-log" || location.pathname === "/maintenance-log/new"
 
   return (
     <motion.nav 

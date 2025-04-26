@@ -1,7 +1,8 @@
 import { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import { supabase } from '../../utils/supabaseClient';
+import { ArrowLeft } from 'lucide-react';
 import "./BikeDetails.css";
 
 const BikeDetails = () => {
@@ -10,6 +11,7 @@ const BikeDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { bikeId } = useParams();
+  const navigate = useNavigate();
 
   // Fetch bike details
   const fetchBike = useCallback(async () => {
@@ -137,7 +139,16 @@ const BikeDetails = () => {
     <div className="min-h-screen bg-dark">
       <Navbar />
       <div className="p-6">
-        <h1 className="text-3xl font-bold text-white">{bike.name || bike['Image text']}</h1>
+        <h1 className="text-3xl font-bold text-white pt-8">{bike.name || bike['Image text']}</h1>
+        <div className="flex items-center gap-4 mb-8">
+          <button
+            onClick={() => navigate('/dashboard')}
+            className="flex items-center gap-2 text-green-500 hover:text-green-400 transition-colors"
+          >
+            <ArrowLeft size={20} />
+            <span>Back to Dashboard</span>
+          </button>
+        </div>
         <div className="relative h-[400px] mt-4 rounded-lg overflow-hidden">
           <img
             src={bike.image}

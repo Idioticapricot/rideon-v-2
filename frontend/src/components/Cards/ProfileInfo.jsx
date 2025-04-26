@@ -47,15 +47,15 @@ const ProfileInfo = ({ onLogout }) => {
 
             <div className="p-2">
               <Link 
-                to="/profile" 
+                to="/fuel" 
                 className="flex items-center px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
                 onClick={() => setIsOpen(false)}
               >
-                Profile Settings
+                Milage prediction
               </Link>
               
               <Link 
-                to="/bikes" 
+                to="/dashboard" 
                 className="flex items-center px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
                 onClick={() => setIsOpen(false)}
               >
